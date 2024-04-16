@@ -24,6 +24,30 @@ class SignInScreen extends StatelessWidget {
             SizedBox(
               height: 0.4,
             ),
+            Row(
+              children: [
+                CustomBox(
+                  height: 20,
+                  width: 40,
+                        borderRadius: 10,
+                        child: Center(
+                          child: Text('Sign in',
+                            style: TextStyle(
+                                  color: Color(0xFF34333A),
+                                  fontFamily: "WorkSans",
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w400
+                                ),
+                          ),
+                        ),
+                        padding: 8,
+                        gradient: LinearGradient(
+                            colors: [Color(0xFFDE5B32), Color(0xFFFF9315)
+                        ]
+                      ),
+                      )
+              ],
+            ),
             Container(
                 width: ScreenInfo.width * 0.4,
                 decoration: BoxDecoration(
