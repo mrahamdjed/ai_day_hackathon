@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:problem_solving_platform/screens/event_details/event_details_screen.dart';
 import 'package:problem_solving_platform/screens/landing/landing_page.dart';
 import 'package:problem_solving_platform/screens/ongoing/ongoing_event_screen.dart';
 import 'package:problem_solving_platform/screens/past/past_event_screen.dart';
@@ -10,6 +11,6 @@ class MyAppView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const UpcomingEventScreen();
+    return const EventDetailsScreen();
   }
 }
