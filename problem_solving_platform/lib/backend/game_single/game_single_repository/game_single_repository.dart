@@ -16,15 +16,23 @@ class GameSingleRepository {
       print("ADDED=====");
   }
 
-  static Future<void> joinTeamGame(String teamId,String userId) async {
+  static Future<void> joinTeamGame(String teamId) async {
       await _supabaseClient.from('event_join_team').insert({
-        "user_id" : userId,
         "team_id" : teamId,
         "start_at" : '${TimeOfDay.now().hour}:${TimeOfDay.now().minute}:00',
         "end_at" : '00:00:00',
         "score" : 0,
       });
       print("ADDED=====");
+  }
+
+  static Future<bool> alreadyjoined(String userId,String eventId) async {
+    // final List temp = await _supabaseClient.from('event_join_team').select('team_id').eq('user_id',userId);
+    final List temp = await _supabaseClient.from('event_join_single').select('user_id').eq('user_id',userId).eq("event_id", eventId);
+    if(temp.isEmpty){
+      return false;
+    }
+    return true;
   }
 
   static Future<void> joinAndCreateTeamGame(String userId,String teamName,String? discreption) async {
@@ -47,6 +55,8 @@ class GameSingleRepository {
       print("ADDED=====");
   }
   
+
+
   // Future<void> addInScore(String eventId,String userId,int addedScore)async{
   //   Map old =  (await supabaseClient.from('event_join_single').select('*').eq("user_id", userId).eq("event_id", eventId))[0];
   //   await supabaseClient.from('event_join_single').update({"score" : old["score"]+ addedScore }).eq("user_id", userId).eq("event_id", eventId);

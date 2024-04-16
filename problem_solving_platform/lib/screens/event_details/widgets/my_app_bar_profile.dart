@@ -23,57 +23,61 @@ class MyAppBarProfile extends StatelessWidget {
             'assets/vectors/Component 4.svg',
             height: 70,
           ),
-          Container(
-            height: 70,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: Colors.white.withOpacity(0.05),
-            ),
-            child :  Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 35.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
+          Row(
+            children: [
+              Container(
+                height: 70,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.white.withOpacity(0.05),
+                ),
+                child : Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 35.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
+                      Row(
                         children: [
-                          AutoSizeText(
-                            'Home',
-                            minFontSize: 18,
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              AutoSizeText(
+                                'Home',
+                                minFontSize: 18,
+                                style: TextStyle(
+                                  color: Color(0xFF97959F),
+                                  fontFamily: 'WorkSans',
+                                  fontWeight: FontWeight.w400
+                                ),
+                              ),
+                              Container(
+                                width: 50,
+                                height: 1,
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(colors: [Color(0xFFDE5B32),Color(0xFFFF9315)])
+                                ),
+                              )
+                            ],
+                          ),
+                          SizedBox(width: 35,),
+                          GradientText(
+                            'Events', 
                             style: TextStyle(
-                              color: Color(0xFF97959F),
                               fontFamily: 'WorkSans',
+                              fontSize: 18,
                               fontWeight: FontWeight.w400
                             ),
-                          ),
-                          Container(
-                            width: 50,
-                            height: 1,
-                            decoration: BoxDecoration(
-                              gradient: LinearGradient(colors: [Color(0xFFDE5B32),Color(0xFFFF9315)])
-                            ),
-                          )
+                            gradient: LinearGradient(colors: [Color(0xFFDE5B32),Color(0xFFFF9315)])),
+
                         ],
                       ),
-                      SizedBox(width: 35,),
-                      GradientText(
-                        'Events', 
-                        style: TextStyle(
-                          fontFamily: 'WorkSans',
-                          fontSize: 18,
-                          fontWeight: FontWeight.w400
-                        ),
-                        gradient: LinearGradient(colors: [Color(0xFFDE5B32),Color(0xFFFF9315)])),
-                      SizedBox(width: 35,),
                     ],
                   ),
-                  SvgPicture.asset('assets/vectors/User_cicrle_duotone-1.svg')
-                ],
+                ),
               ),
-            ),
+              SvgPicture.asset('assets/vectors/User_cicrle_duotone-1.svg'),
+            ],
           )
         ],
       ),

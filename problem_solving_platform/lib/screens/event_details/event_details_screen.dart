@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
@@ -8,11 +9,13 @@ import 'package:problem_solving_platform/backend/game_single/game_single_reposit
 import 'package:problem_solving_platform/backend/my_user/bloc/authentication_bloc/authentication_bloc.dart';
 import 'package:problem_solving_platform/core/widgets/custom_box.dart';
 import 'package:problem_solving_platform/core/widgets/gradient_text.dart';
+import 'package:problem_solving_platform/core/widgets/my_bottom_bar.dart';
 import 'package:problem_solving_platform/core/widgets/my_text_form_field.dart';
 import 'package:problem_solving_platform/core/widgets/screen_info.dart';
+import 'package:problem_solving_platform/screens/event_challenges/challenges_fetch.dart';
+import 'package:problem_solving_platform/screens/event_challenges/event_challenges_screen.dart';
 import 'package:problem_solving_platform/screens/event_details/widgets/my_app_bar_profile.dart';
 import 'package:problem_solving_platform/screens/landing/widgets/my_app_bar.dart';
-import 'package:problem_solving_platform/screens/ongoing/widgets/event_card.dart';
 import 'package:problem_solving_platform/screens/sign_in/widgets/my_app_bar_sign_in.dart';
 import 'package:provider/provider.dart';
 
@@ -47,17 +50,33 @@ class EventDetailsScreen extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
-                    OptionItem(optionName: 'JOIN A TEAM',optionDescription: 'team up with an already existing team, build your strategie and win',),
-                    OptionItem(optionName: 'CREATE A TEAM',optionDescription: 'create a Your own team, invit your friends and win the game',),
+                    GestureDetector(
+                      onTap: (){
+                        // GameSingleRepository.joinTeamGame(eventModel.event_id, context.read<AuthenticationBloc>().state.myUserModel!.id);
+                        //  Navigator.of(context).push(MaterialPageRoute(builder: (context) => const EventChallengesScreen()));
+                      },
+                      child: OptionItem(optionName: 'JOIN A TEAM',optionDescription: 'team up with an already existing team, build your strategie and win',)),
+                    GestureDetector(
+                      onTap: (){
+                        // GameSingleRepository.joinSingleGame(eventModel.event_id, context.read<AuthenticationBloc>().state.myUserModel!.id);
+                        //  Navigator.of(context).push(MaterialPageRoute(builder: (context) => const EventChallengesScreen()));
+                      },
+                      child: OptionItem(optionName: 'CREATE A TEAM',optionDescription: 'create a Your own team, invit your friends and win the game',)),
                     GestureDetector(
                       onTap: (){
                         GameSingleRepository.joinSingleGame(eventModel.event_id, context.read<AuthenticationBloc>().state.myUserModel!.id);
+                         Navigator.of(context).push(MaterialPageRoute(builder: (context) => ChangeNotifierProvider<ChallengesFetchProvider>(
+                    create: (context) =>
+                        ChallengesFetchProvider(eventModel.event_id),
+                        child:  EventChallengesScreen(eventModel: eventModel, isTeam: false,))));
+
                       },
                       child: OptionItem(optionName: 'GO SOLO',optionDescription: 'lone wolf? or maybe just too lazy to go search for a team?\nwell we’ve thought about you!',)),
                   ],
                 ),
               ),
-            )
+            ),
+            MyBottomBar()
           ]),
         ),
       ),

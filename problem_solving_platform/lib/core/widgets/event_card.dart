@@ -1,11 +1,18 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:problem_solving_platform/backend/event/event_repository/model/event_model.dart';
 import 'package:problem_solving_platform/backend/event/provider/event_provider.dart';
+import 'package:problem_solving_platform/backend/game_single/game_single_repository/game_single_repository.dart';
+import 'package:problem_solving_platform/backend/game_single/game_single_repository/model/game_single_model.dart';
+import 'package:problem_solving_platform/backend/my_user/bloc/authentication_bloc/authentication_bloc.dart';
 import 'package:problem_solving_platform/core/widgets/custom_box.dart';
 import 'package:problem_solving_platform/core/widgets/gradient_text.dart';
 import 'package:problem_solving_platform/core/widgets/screen_info.dart';
+import 'package:problem_solving_platform/screens/event_challenges/challenges_fetch.dart';
+import 'package:problem_solving_platform/screens/event_challenges/event_challenges_screen.dart';
 import 'package:problem_solving_platform/screens/event_details/event_details_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -20,8 +27,15 @@ class EventCard extends StatelessWidget {
       itemCount: close.length,
       itemBuilder: (context, index) {
         return GestureDetector(
-          onTap: (){
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) => EventDetailsScreen(eventModel: close[index])));
+          onTap: ()async{
+            if(await GameSingleRepository.alreadyjoined(context.read<AuthenticationBloc>().state.myUserModel!.id,close[index].event_id)){
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => ChangeNotifierProvider<ChallengesFetchProvider>(
+                    create: (context) =>
+                        ChallengesFetchProvider(close[index].event_id),
+                  child: EventChallengesScreen(eventModel: close[index],isTeam: false,))));
+            }else{
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => EventDetailsScreen(eventModel: close[index])));
+            }
           },
           child: GridCard(eventModel: close[index],));
       },
@@ -30,9 +44,10 @@ class EventCard extends StatelessWidget {
 }
 
 class GridCard extends StatelessWidget {
+  final EventModel eventModel;
   const GridCard({
     super.key,
-    required EventModel eventModel,
+    required this.eventModel,
   });
 
   @override
@@ -75,7 +90,7 @@ class GridCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10)
                                     ),
                                     child: Center(
-                    child: const Column(
+                    child:  Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
@@ -90,7 +105,7 @@ class GridCard extends StatelessWidget {
                           height: 10,
                         ),
                         GradientText(
-                          '15-04-24\n19:00 pm',
+                          '${eventModel.start_date}\n${eventModel.start_at}',
                           gradient: LinearGradient(
                       colors: [Color(0xFFDE5B32), Color(0xFFFF9315)]),
                           style: TextStyle(
@@ -148,7 +163,7 @@ class GridCard extends StatelessWidget {
                   border: Border.all(color: Colors.white.withOpacity(0.075),width: 1),
                   child: Center(
                     child: Text(
-                      'Spots : 400 (Limited)',
+                      'Spots : ${Random().nextInt(444)} (Limited)',
                       style: TextStyle(
                           color: Colors.white,
                           fontFamily: "WorkSans",
