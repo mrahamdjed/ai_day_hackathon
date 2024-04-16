@@ -28,6 +28,7 @@ class MyApp extends StatelessWidget {
         create: (context) =>
             AuthenticationBloc(RepositoryProvider.of<UserRepository>(context)),
         child: MaterialApp(
+          debugShowCheckedModeBanner: false,
           home: BlocBuilder<AuthenticationBloc, AuthenticationState>(
             builder: (context, state) {
 

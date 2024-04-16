@@ -2,26 +2,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:problem_solving_platform/backend/event/event_repository/model/event_model.dart';
-import 'package:problem_solving_platform/backend/event/provider/event_provider.dart';
-import 'package:problem_solving_platform/backend/game_single/game_single_repository/game_single_repository.dart';
-import 'package:problem_solving_platform/backend/game_single/game_single_repository/model/game_single_model.dart';
-import 'package:problem_solving_platform/backend/my_user/bloc/authentication_bloc/authentication_bloc.dart';
 import 'package:problem_solving_platform/core/widgets/custom_box.dart';
 import 'package:problem_solving_platform/core/widgets/gradient_text.dart';
 import 'package:problem_solving_platform/core/widgets/my_bottom_bar.dart';
 import 'package:problem_solving_platform/core/widgets/my_text_form_field.dart';
 import 'package:problem_solving_platform/core/widgets/screen_info.dart';
-import 'package:problem_solving_platform/screens/event_challenges/challenges_fetch.dart';
-import 'package:problem_solving_platform/screens/event_challenges/event_challenges_screen.dart';
 import 'package:problem_solving_platform/screens/event_details/widgets/my_app_bar_profile.dart';
 import 'package:problem_solving_platform/screens/landing/widgets/my_app_bar.dart';
 import 'package:problem_solving_platform/screens/sign_in/widgets/my_app_bar_sign_in.dart';
-import 'package:provider/provider.dart';
 
 class EventDetailsScreen extends StatelessWidget {
-  final EventModel eventModel;
-  const EventDetailsScreen({super.key, required this.eventModel});
+  const EventDetailsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -52,9 +43,6 @@ class EventDetailsScreen extends StatelessWidget {
                   children: [
                     GestureDetector(
                       onTap: () {
-
-                        TextEditingController teamNameCont= TextEditingController();
-
                         showDialog(
                           context: context,
                           builder: (BuildContext context) {
@@ -78,7 +66,7 @@ class EventDetailsScreen extends StatelessWidget {
                                         borderRadius: 10,
                                         fillColor: Color(0xFF34333A),
                                         borderSide: BorderSide(color: Colors.white.withOpacity(0.4)),
-                                        hintText: "TEAM NAME",
+                                        hintText: "Email",
                                         hintStyle: TextStyle(
                                           color: Colors.white.withOpacity(0.3),
                                           fontFamily: "WorkSans",
@@ -92,32 +80,23 @@ class EventDetailsScreen extends StatelessWidget {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceEvenly,
                                   children: [
-                                    GestureDetector(
-                                      onTap: (){
-                                        GameSingleRepository.joinTeamGame(teamNameCont.text);
-                                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => ChangeNotifierProvider<ChallengesFetchProvider>(
-                    create: (context) =>
-                        ChallengesFetchProvider(eventModel.event_id),
-                  child: EventChallengesScreen(eventModel: eventModel,isTeam: true,))));
-                                      },
-                                      child: CustomBox(
-                                        width: ScreenInfo.width * 0.3,
-                                        height: ScreenInfo.height * 0.067,
-                                        gradient: const LinearGradient(colors: [
-                                          Color(0xFFDE5B32),
-                                          Color(0xFFFF9315)
-                                        ]),
-                                        borderRadius: 10,
-                                        padding: 10,
-                                        child: const Center(
-                                            child: Text(
-                                          'Send a request',
-                                          style: TextStyle(
-                                              color: Color(0xFF34333A),
-                                              fontFamily: "WorkSans",
-                                              fontSize: 18),
-                                        )),
-                                      ),
+                                    CustomBox(
+                                      width: ScreenInfo.width * 0.3,
+                                      height: ScreenInfo.height * 0.067,
+                                      gradient: const LinearGradient(colors: [
+                                        Color(0xFFDE5B32),
+                                        Color(0xFFFF9315)
+                                      ]),
+                                      borderRadius: 10,
+                                      padding: 10,
+                                      child: const Center(
+                                          child: Text(
+                                        'Send a request',
+                                        style: TextStyle(
+                                            color: Color(0xFF34333A),
+                                            fontFamily: "WorkSans",
+                                            fontSize: 18),
+                                      )),
                                     )
                                   ],
                                 ),
@@ -134,9 +113,6 @@ class EventDetailsScreen extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: () {
-                        TextEditingController teamNameCont= TextEditingController();
-                        TextEditingController teamDiscCont= TextEditingController();
-
                         showDialog(
                           context: context,
                           builder: (BuildContext context) {
@@ -201,32 +177,23 @@ class EventDetailsScreen extends StatelessWidget {
                                       )),
                                     ),
                                     SizedBox(width: 15,),
-                                    GestureDetector(
-                                      onTap: (){
-                                        GameSingleRepository.joinAndCreateTeamGame(eventModel.event_id,context.read<AuthenticationBloc>().state.myUserModel!.id,teamNameCont.text, teamDiscCont.text);
-                                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => ChangeNotifierProvider<ChallengesFetchProvider>(
-                    create: (context) =>
-                        ChallengesFetchProvider(eventModel.event_id),
-                  child: EventChallengesScreen(eventModel: eventModel,isTeam: true,))));
-                                      },
-                                      child: CustomBox(
-                                        width: ScreenInfo.width * 0.15,
-                                        height: ScreenInfo.height * 0.067,
-                                        gradient: const LinearGradient(colors: [
-                                          Color(0xFFDE5B32),
-                                          Color(0xFFFF9315)
-                                        ]),
-                                        borderRadius: 10,
-                                        padding: 10,
-                                        child: const Center(
-                                            child: Text(
-                                          'Validate',
-                                          style: TextStyle(
-                                              color: Color(0xFF34333A),
-                                              fontFamily: "WorkSans",
-                                              fontSize: 18),
-                                        )),
-                                      ),
+                                    CustomBox(
+                                      width: ScreenInfo.width * 0.15,
+                                      height: ScreenInfo.height * 0.067,
+                                      gradient: const LinearGradient(colors: [
+                                        Color(0xFFDE5B32),
+                                        Color(0xFFFF9315)
+                                      ]),
+                                      borderRadius: 10,
+                                      padding: 10,
+                                      child: const Center(
+                                          child: Text(
+                                        'Validate',
+                                        style: TextStyle(
+                                            color: Color(0xFF34333A),
+                                            fontFamily: "WorkSans",
+                                            fontSize: 18),
+                                      )),
                                     )
                                   ],
                                 ),
@@ -241,19 +208,10 @@ class EventDetailsScreen extends StatelessWidget {
                             'create a Your own team, invit your friends and win the game',
                       ),
                     ),
-                    GestureDetector(
-                      onTap: (){        
-                        GameSingleRepository.joinSingleGame(eventModel.event_id,context.read<AuthenticationBloc>().state.myUserModel!.id);
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => ChangeNotifierProvider<ChallengesFetchProvider>(
-                    create: (context) =>
-                        ChallengesFetchProvider(eventModel.event_id),
-                  child: EventChallengesScreen(eventModel: eventModel,isTeam: false,))));
-                      },
-                      child: OptionItem(
-                        optionName: 'GO SOLO',
-                        optionDescription:
-                            'lone wolf? or maybe just too lazy to go search for a team?\nwell we’ve thought about you!',
-                      ),
+                    OptionItem(
+                      optionName: 'GO SOLO',
+                      optionDescription:
+                          'lone wolf? or maybe just too lazy to go search for a team?\nwell we’ve thought about you!',
                     ),
                   ],
                 ),

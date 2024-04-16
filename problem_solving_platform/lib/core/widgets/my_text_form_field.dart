@@ -44,7 +44,11 @@ class MyTextFormField extends StatelessWidget {
       onChanged: onChanged,
       onTap: onTap,
       onTapOutside: onTapOutside,
-      style: inputStyle,
+      style: inputStyle ?? TextStyle(
+                            color: Colors.white,
+                            fontFamily: "WorkSans",
+                            fontSize: 14,
+                          ),
       textAlignVertical: TextAlignVertical.center,
       // ! ------
       maxLength:maxLength,

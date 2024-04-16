@@ -17,12 +17,12 @@ class GameSingleRepository {
   }
 
   static Future<void> joinTeamGame(String teamId) async {
-      await _supabaseClient.from('event_join_team').insert({
-        "team_id" : teamId,
-        "start_at" : '${TimeOfDay.now().hour}:${TimeOfDay.now().minute}:00',
-        "end_at" : '00:00:00',
-        "score" : 0,
-      });
+      // await _supabaseClient.from('event_join_team').insert({
+      //   "team_id" : teamId,
+      //   "start_at" : '${TimeOfDay.now().hour}:${TimeOfDay.now().minute}:00',
+      //   "end_at" : '00:00:00',
+      //   "score" : 0,
+      // });
       print("ADDED=====");
   }
 
@@ -35,7 +35,7 @@ class GameSingleRepository {
     return true;
   }
 
-  static Future<void> joinAndCreateTeamGame(String userId,String teamName,String? discreption) async {
+  static Future<void> joinAndCreateTeamGame(String eventId,String userId,String teamName,String? discreption) async {
       
       await _supabaseClient.from('team').insert({
         "created_by_id" : userId,
@@ -46,7 +46,7 @@ class GameSingleRepository {
       final String teamId = (await _supabaseClient.from('team').select('team_id').eq('created_by_id',userId).eq("team_name", teamName))[0]["team_id"];
       
       await _supabaseClient.from('event_join_team').insert({
-        "user_id" : userId,
+        "event_id" : eventId,
         "team_id" : teamId,
         "start_at" : '${TimeOfDay.now().hour}:${TimeOfDay.now().minute}:00',
         "end_at" : '00:00:00',

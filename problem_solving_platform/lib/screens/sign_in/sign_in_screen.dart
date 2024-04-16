@@ -83,7 +83,14 @@ class SignInScreen extends StatelessWidget {
                             color: Colors.white.withOpacity(0.3),
                             fontFamily: "WorkSans",
                             fontSize: 14,
-                          )),
+                          ),
+                          inputStyle: TextStyle(
+                            color: Colors.white,
+                            fontFamily: "WorkSans",
+                            fontSize: 14,
+                          ),
+                          
+                          ),
                       SizedBox(
                         height: 16,
                       ),
@@ -97,7 +104,13 @@ class SignInScreen extends StatelessWidget {
                             color: Colors.white.withOpacity(0.3),
                             fontFamily: "WorkSans",
                             fontSize: 14,
-                          )),
+                          ),
+                          inputStyle: TextStyle(
+                            color: Colors.white,
+                            fontFamily: "WorkSans",
+                            fontSize: 14,
+                          ),
+                          ),
                       SizedBox(
                         height: 16,
                       ),

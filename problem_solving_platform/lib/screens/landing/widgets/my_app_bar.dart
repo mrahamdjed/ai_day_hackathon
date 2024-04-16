@@ -11,6 +11,7 @@ import 'package:problem_solving_platform/core/widgets/custom_box.dart';
 import 'package:problem_solving_platform/core/widgets/gradient_text.dart';
 import 'package:problem_solving_platform/core/widgets/screen_info.dart';
 import 'package:problem_solving_platform/screens/sign_in/sign_in_screen.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class MyAppBar extends StatelessWidget {
   const MyAppBar({super.key});
@@ -122,23 +123,28 @@ class MyAppBar extends StatelessWidget {
                           width: 20,
                         ),
                         Expanded(
-                          child: CustomBox(
-                            borderRadius: 6,
-                            padding: 10,
-                            border: Border.all(
-                                color: Colors.white.withOpacity(0.075),
-                                width: 1),
-                            width: 90,
-                            height: 45,
-                            gradient: const LinearGradient(
-                                colors: [Color(0xFFDE5B32), Color(0xFFFF9315)]),
-                            child: const Center(
-                              child: Text('Sign Up',
-                                  style: TextStyle(
-                                      color: Color(0xFF34333A),
-                                      fontFamily: "WorkSans",
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w400)),
+                          child: GestureDetector(
+                            onTap: (){
+                              Supabase.instance.client.auth.signUp(email: "amdjed@gmail.com",password: "1234567");
+                            },
+                            child: CustomBox(
+                              borderRadius: 6,
+                              padding: 10,
+                              border: Border.all(
+                                  color: Colors.white.withOpacity(0.075),
+                                  width: 1),
+                              width: 90,
+                              height: 45,
+                              gradient: const LinearGradient(
+                                  colors: [Color(0xFFDE5B32), Color(0xFFFF9315)]),
+                              child: const Center(
+                                child: Text('Sign Up',
+                                    style: TextStyle(
+                                        color: Color(0xFF34333A),
+                                        fontFamily: "WorkSans",
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w400)),
+                              ),
                             ),
                           ),
                         ),

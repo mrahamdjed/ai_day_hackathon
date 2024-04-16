@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
@@ -11,6 +12,7 @@ import 'package:problem_solving_platform/screens/event_challenges/challenges_fet
 import 'package:problem_solving_platform/screens/event_details/widgets/my_app_bar_profile.dart';
 import 'package:problem_solving_platform/screens/landing/widgets/my_app_bar.dart';
 import 'package:problem_solving_platform/core/widgets/event_card.dart';
+import 'package:problem_solving_platform/screens/leaderboard/leaderboard.dart';
 import 'package:problem_solving_platform/screens/sign_in/widgets/my_app_bar_sign_in.dart';
 import 'package:provider/provider.dart';
 
@@ -43,19 +45,27 @@ class EventChallengesScreen extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  CustomBox(
-                    borderRadius: 10,
-                    padding: 10,
-                    color: Color(0xFF3E3D44),
-                    width: 180,
-                    child: Center(
-                      child: Text(
-                        'LeaderBoard',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: "WorkSans",
-                          fontSize: 18,
-                          fontWeight: FontWeight.w400,
+                  GestureDetector(
+                    onTap: (){
+                      Navigator.of(context).push(MaterialPageRoute<void>(
+      builder: (BuildContext context) => const LeaderBoard(),
+    ),);
+                      
+                    },
+                    child: CustomBox(
+                      borderRadius: 10,
+                      padding: 10,
+                      color: Color(0xFF3E3D44),
+                      width: 180,
+                      child: Center(
+                        child: Text(
+                          'LeaderBoard',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: "WorkSans",
+                            fontSize: 18,
+                            fontWeight: FontWeight.w400,
+                          ),
                         ),
                       ),
                     ),
@@ -71,7 +81,7 @@ class EventChallengesScreen extends StatelessWidget {
                           fontSize: 16,
                         ),
                       ),
-                      GradientText( "${Provider.of<ChallengesFetchProvider>(context,listen: true).score}"?? "",
+                      GradientText( "${Provider.of<ChallengesFetchProvider>(context,listen: true).score ?? "0" }",
                           gradient: LinearGradient(
                               colors: [Color(0xFFDE5B32), Color(0xFFFF9315)]),
                           style: TextStyle(
