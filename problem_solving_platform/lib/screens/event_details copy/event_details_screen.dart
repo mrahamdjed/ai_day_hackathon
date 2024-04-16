@@ -7,6 +7,7 @@ import 'package:problem_solving_platform/core/widgets/my_text_form_field.dart';
 import 'package:problem_solving_platform/core/widgets/screen_info.dart';
 import 'package:problem_solving_platform/screens/event_details/widgets/my_app_bar_profile.dart';
 import 'package:problem_solving_platform/screens/landing/widgets/my_app_bar.dart';
+import 'package:problem_solving_platform/core/widgets/event_card.dart';
 import 'package:problem_solving_platform/screens/sign_in/widgets/my_app_bar_sign_in.dart';
 
 class EventDetailsScreen extends StatelessWidget {

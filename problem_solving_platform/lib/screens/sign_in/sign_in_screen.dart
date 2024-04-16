@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:problem_solving_platform/core/widgets/custom_box.dart';
 import 'package:problem_solving_platform/core/widgets/gradient_text.dart';
+import 'package:problem_solving_platform/core/widgets/my_bottom_bar.dart';
 import 'package:problem_solving_platform/core/widgets/my_text_form_field.dart';
 import 'package:problem_solving_platform/core/widgets/screen_info.dart';
 import 'package:problem_solving_platform/screens/landing/widgets/my_app_bar.dart';
@@ -161,7 +162,8 @@ class SignInScreen extends StatelessWidget {
                       )),
                     ],
                   )
-                ]))
+                ])),
+                MyBottomBar()
           ]),
         ),
       ),
