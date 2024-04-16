@@ -30,17 +30,20 @@ class EventDetailsScreen extends StatelessWidget {
             SizedBox(
               height: 32,
             ),
-            Container(
-              decoration: BoxDecoration(
-              color: Color(0xFF3E3D44),
-                borderRadius: BorderRadius.circular(16),
-              ),
-              child: Column(
-                children: [
-                  OptionItem(optionName: 'JOIN A TEAM',optionDescription: 'team up with an already existing team, build your strategie and win',),
-                  OptionItem(optionName: 'CREATE A TEAM',optionDescription: 'create a Your own team, invit your friends and win the game',),
-                  OptionItem(optionName: 'GO SOLO',optionDescription: 'lone wolf? or maybe just too lazy to go search for a team?\nwell we’ve thought about you!',),
-                ],
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24.0),
+              child: Container(
+                decoration: BoxDecoration(
+                color: Color(0xFF3E3D44),
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: Column(
+                  children: [
+                    OptionItem(optionName: 'JOIN A TEAM',optionDescription: 'team up with an already existing team, build your strategie and win',),
+                    OptionItem(optionName: 'CREATE A TEAM',optionDescription: 'create a Your own team, invit your friends and win the game',),
+                    OptionItem(optionName: 'GO SOLO',optionDescription: 'lone wolf? or maybe just too lazy to go search for a team?\nwell we’ve thought about you!',),
+                  ],
+                ),
               ),
             )
           ]),
@@ -84,7 +87,7 @@ class OptionItemReal extends StatelessWidget {
     return Column(
       children: [
         Container(
-          width: ScreenInfo.width * 0.8,
+          width: ScreenInfo.width * 0.9,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             color: Color(0xFF34333A),
