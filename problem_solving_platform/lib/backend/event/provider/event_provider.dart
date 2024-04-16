@@ -24,18 +24,23 @@ class EventProvider extends ChangeNotifier{
     final temp = await EventRepository.getPreviosEvents();
     gettedEvents = temp;
     notifyListeners();
+      // print("[[[[[[[[[[[[[[[[[[  List of EVENTS $gettedEvents  ]]]]]]]]]]]]]]]]]]");
+
   }
 
   Future<void> getTodayEvents() async {
     final temp = await EventRepository.getTodayEvents();
     gettedEvents = temp;
     notifyListeners();
+      // print("[[[[[[[[[[[[[[[[[[  List of EVENTS $gettedEvents  ]]]]]]]]]]]]]]]]]]");
+
   }
 
   Future<void> getCommingEvents() async {
     final temp = await EventRepository.getCommingEvents();
     gettedEvents = temp;
     notifyListeners();
+      // print("[[[[[[[[[[[[[[[[[[  List of EVENTS $gettedEvents  ]]]]]]]]]]]]]]]]]]");
   }
 
 }

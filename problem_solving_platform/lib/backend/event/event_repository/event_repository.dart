@@ -5,20 +5,21 @@ class EventRepository {
   
   static SupabaseClient supabaseClient = Supabase.instance.client;
 
+
   static Future<List<EventModel>> getTodayEvents()async{
     try {
 
-      final List<Map<String, dynamic>> response = await supabaseClient.from('event').select('*').filter('start_date', 'eq', DateTime.parse('2024-04-16'));
-
+      final List<Map<String, dynamic>> response = await supabaseClient.from('event').select('event_id,event_name,event_discreption,start_at,end_at,start_date,end_date').filter('start_date', 'eq', DateTime.parse('2024-04-16'));
       final List<EventModel> list=[];
 
-      for(Map map in response){
-        list.add(EventModel.fromMap(map));
+      for(int i=0 ; i<response.length ; i++){
+        print(response[i]);
+        list.add(EventModel.fromMap(response[i]));
       }
       return list;
     
     } catch (e) {
-      print("[[[[[[[[[[[[[[[[[[  EMPTY TODAY EVENTS ERROR  ]]]]]]]]]]]]]]]]]]");
+      print("ERROR getTodayEvents");
       return [];
     }
   }
@@ -26,7 +27,7 @@ class EventRepository {
   static Future<List<EventModel>> getPreviosEvents()async{
     try {
 
-      final List<Map<String, dynamic>> response = await supabaseClient.from('event').select('*').gt('start_date',DateTime.parse('2024-04-16'));
+      final List<Map<String, dynamic>> response = await supabaseClient.from('event').select('event_id,event_name,event_discreption,start_at,end_at,start_date,end_date').gt('start_date',DateTime.parse('2024-04-16'));
 
       final List<EventModel> list=[];
 
@@ -44,7 +45,7 @@ class EventRepository {
   static Future<List<EventModel>> getCommingEvents()async{
     try {
 
-      final List<Map<String, dynamic>> response = await supabaseClient.from('event').select('*').lt('start_date', DateTime.parse('2024-04-16'));
+      final List<Map<String, dynamic>> response = await supabaseClient.from('event').select('event_id,event_name,event_discreption,start_at,end_at,start_date,end_date').lt('start_date', DateTime.parse('2024-04-16'));
 
       final List<EventModel> list=[];
 

@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:problem_solving_platform/backend/my_user/bloc/authentication_bloc/authentication_bloc.dart';
 import 'package:problem_solving_platform/backend/my_user/user_repository/user_repository.dart';
 import 'package:problem_solving_platform/screens/landing/landing_page.dart';
+import 'package:problem_solving_platform/screens/sign_in%20copy/ongoing_event_screen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 
@@ -29,14 +30,11 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
           home: BlocBuilder<AuthenticationBloc, AuthenticationState>(
             builder: (context, state) {
-              print("=====================================${state.authenticationStatus}================");
 
               if(state.authenticationStatus != AuthenticationStatus.authenticated){
                 return const LandingPage();
               }else{
-                return const Center(
-                  child: Text("Authen"),
-                );
+                return const OngoingEventScreen();
               }
             
             },

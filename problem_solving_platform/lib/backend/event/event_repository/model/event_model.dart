@@ -1,15 +1,15 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
-class EventModel extends Equatable{
+class EventModel{
 
   final String event_id;
   final String event_name;
   final String event_discreption;
-  final TimeOfDay start_at;
-  final TimeOfDay end_at;
-  final DateTime start_date;
-  final DateTime end_date;
+  final String start_at;
+  final String end_at;
+  final String start_date;
+  final String end_date;
 
   const EventModel({
     required this.event_id,
@@ -31,19 +31,16 @@ class EventModel extends Equatable{
   // }
 
   static EventModel fromMap(Map eventMap){
+    print("[[[[[[[[[[[[[[[[[[[[[[[[[[ }}}}}}}}}}}}}}}}}}");
     return EventModel(
       event_id: eventMap["event_id"],
-      event_name: eventMap["event_name"], 
-      event_discreption: eventMap["event_discreption"], 
+      event_name: eventMap["event_name"] as String, 
+      event_discreption: eventMap["event_discreption"] as String, 
       start_at: eventMap["start_at"], 
       end_at: eventMap["end_at"], 
       start_date: eventMap["start_date"], 
       end_date: eventMap["end_date"]
     );
   }
-   
-  @override
-  // TODO: implement props
-  List<Object?> get props => throw UnimplementedError();
 
 }

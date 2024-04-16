@@ -23,10 +23,11 @@ class SignInScreen extends StatelessWidget {
     ScreenInfo.height = MediaQuery.of(context).size.height;
     ScreenInfo.width = MediaQuery.of(context).size.width;
     bool activeSignIn = true;
-    String errMsg;
+    String? errMsg;
 
     return BlocBuilder<SignInBloc, SignInState>(
       builder: (context, state) {
+
         if(context.read<AuthenticationBloc>().state.authenticationStatus == AuthenticationStatus.authenticated)
         {
           Navigator.of(context).pop();
@@ -36,8 +37,9 @@ class SignInScreen extends StatelessWidget {
         }else{
           activeSignIn = true;
         }
+
         if(state is SignInFailure){
-          errMsg=state.message!;
+          errMsg=state.message;
         }
 
         return Scaffold(
@@ -150,7 +152,6 @@ class SignInScreen extends StatelessWidget {
                               GestureDetector(
                             onTap: () async {
                               context.read<SignInBloc>().add(SignInRequired(emailCont.text, passwordCont.text));
-                              
                             },
                             child: CustomBox(
                               borderRadius: 10,
