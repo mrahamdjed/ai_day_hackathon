@@ -8,7 +8,7 @@ import 'package:problem_solving_platform/core/widgets/gradient_text.dart';
 import 'package:problem_solving_platform/core/widgets/my_text_form_field.dart';
 import 'package:problem_solving_platform/core/widgets/screen_info.dart';
 import 'package:problem_solving_platform/screens/landing/widgets/my_app_bar.dart';
-import 'package:problem_solving_platform/screens/sign_in%20copy/widgets/event_card.dart';
+import 'package:problem_solving_platform/screens/ongoing/widgets/event_card.dart';
 import 'package:problem_solving_platform/screens/sign_in/widgets/my_app_bar_sign_in.dart';
 import 'package:provider/provider.dart';
 
