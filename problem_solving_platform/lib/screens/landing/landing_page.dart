@@ -52,8 +52,7 @@ class LandingPage extends StatelessWidget {
                   color: Color(0xFF97959F),
                   fontSize: 16,
                   fontFamily: "WorkSans",)
-              )
-              
+              ),
             ]
           ),
         ),
