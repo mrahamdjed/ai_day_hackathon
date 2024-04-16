@@ -1,20 +1,29 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:problem_solving_platform/backend/event/event_repository/model/event_model.dart';
+import 'package:problem_solving_platform/backend/event/provider/event_provider.dart';
 import 'package:problem_solving_platform/core/widgets/custom_box.dart';
 import 'package:problem_solving_platform/core/widgets/gradient_text.dart';
 import 'package:problem_solving_platform/core/widgets/screen_info.dart';
+import 'package:problem_solving_platform/screens/event_details/event_details_screen.dart';
+import 'package:provider/provider.dart';
 
 class EventCard extends StatelessWidget {
   const EventCard({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final close = Provider.of<EventProvider>(context,listen: false).gettedEvents;
     return GridView.builder(
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,mainAxisExtent: 605), 
-      itemCount: 3,
+      itemCount: close.length,
       itemBuilder: (context, index) {
-        return GridCard();
+        return GestureDetector(
+          onTap: (){
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) => EventDetailsScreen(eventModel: close[index])));
+          },
+          child: GridCard(eventModel: close[index],));
       },
     );
   }
@@ -23,6 +32,7 @@ class EventCard extends StatelessWidget {
 class GridCard extends StatelessWidget {
   const GridCard({
     super.key,
+    required EventModel eventModel,
   });
 
   @override

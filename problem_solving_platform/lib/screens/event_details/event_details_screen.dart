@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:problem_solving_platform/backend/event/event_repository/model/event_model.dart';
+import 'package:problem_solving_platform/backend/event/provider/event_provider.dart';
+import 'package:problem_solving_platform/backend/game_single/game_single_repository/game_single_repository.dart';
+import 'package:problem_solving_platform/backend/game_single/game_single_repository/model/game_single_model.dart';
+import 'package:problem_solving_platform/backend/my_user/bloc/authentication_bloc/authentication_bloc.dart';
 import 'package:problem_solving_platform/core/widgets/custom_box.dart';
 import 'package:problem_solving_platform/core/widgets/gradient_text.dart';
 import 'package:problem_solving_platform/core/widgets/my_text_form_field.dart';
@@ -8,9 +14,11 @@ import 'package:problem_solving_platform/screens/event_details/widgets/my_app_ba
 import 'package:problem_solving_platform/screens/landing/widgets/my_app_bar.dart';
 import 'package:problem_solving_platform/screens/ongoing/widgets/event_card.dart';
 import 'package:problem_solving_platform/screens/sign_in/widgets/my_app_bar_sign_in.dart';
+import 'package:provider/provider.dart';
 
 class EventDetailsScreen extends StatelessWidget {
-  const EventDetailsScreen({super.key});
+  final EventModel eventModel;
+  const EventDetailsScreen({super.key, required this.eventModel});
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +49,11 @@ class EventDetailsScreen extends StatelessWidget {
                   children: [
                     OptionItem(optionName: 'JOIN A TEAM',optionDescription: 'team up with an already existing team, build your strategie and win',),
                     OptionItem(optionName: 'CREATE A TEAM',optionDescription: 'create a Your own team, invit your friends and win the game',),
-                    OptionItem(optionName: 'GO SOLO',optionDescription: 'lone wolf? or maybe just too lazy to go search for a team?\nwell we’ve thought about you!',),
+                    GestureDetector(
+                      onTap: (){
+                        GameSingleRepository.joinSingleGame(eventModel.event_id, context.read<AuthenticationBloc>().state.myUserModel!.id);
+                      },
+                      child: OptionItem(optionName: 'GO SOLO',optionDescription: 'lone wolf? or maybe just too lazy to go search for a team?\nwell we’ve thought about you!',)),
                   ],
                 ),
               ),

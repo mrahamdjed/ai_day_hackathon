@@ -93,9 +93,7 @@ class _OngoingEventScreenState extends State<OngoingEventScreen> {
                     onTap: (){
                       Provider.of<EventProvider>(context,listen: false).getPreviousEvents();
                       selected = 2;
-                      setState(() {
-                        
-                      });
+                      setState(() {});
                     },
                     child: CustomBox(
                       borderRadius: 6,
@@ -133,7 +131,9 @@ class _OngoingEventScreenState extends State<OngoingEventScreen> {
                           value.getTodayEvents();
                           init = true;
                         }
-                        return  EventCard();
+                        return  ChangeNotifierProvider<EventProvider>.value(
+                          value: Provider.of<EventProvider>(context),
+                          child: EventCard());
                       }
                       )
                     ))
